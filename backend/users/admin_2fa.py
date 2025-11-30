@@ -63,9 +63,11 @@ class Setup2FAView(View):
             totp_device = TOTPDevice.objects.create(
                 user=user,
                 name='Ambassade Congo Admin',
-                confirmed=False,
-                tolerance=2  # Accepte codes de +/- 60 secondes pour le décalage horaire
+                confirmed=False
             )
+            # Définir la tolérance pour accepter +/- 60 secondes de décalage horaire
+            totp_device.tolerance = 2
+            totp_device.save()
         
         # Générer le QR code
         config_url = totp_device.config_url
@@ -103,9 +105,13 @@ class Setup2FAView(View):
             messages.error(request, 'Aucun appareil 2FA trouvé. Veuillez recommencer la configuration.')
             return redirect('admin_setup_2fa')
         
-        # Vérifier le token avec une tolérance pour le décalage horaire
-        # tolerance=2 permet +/- 60 secondes de décalage
-        if totp_device.verify_token(token, tolerance=2):
+        # S'assurer que la tolérance est définie pour le décalage horaire
+        if totp_device.tolerance != 2:
+            totp_device.tolerance = 2
+            totp_device.save()
+        
+        # Vérifier le token
+        if totp_device.verify_token(token):
             # Confirmer l'appareil et activer la 2FA
             totp_device.confirmed = True
             totp_device.save()
