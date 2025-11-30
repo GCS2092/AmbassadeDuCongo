@@ -1,0 +1,23 @@
+Votre demande a été reçue - {{ application.reference_number }}
+
+Bonjour {{ applicant.get_full_name }},
+
+Nous avons bien reçu votre demande consulaire et nous vous remercions de votre confiance.
+
+Détails de votre demande:
+- Référence: {{ application.reference_number }}
+- Type: {{ application.get_application_type_display }}
+- Service: {{ application.service_type.name }}
+- Date de soumission: {{ application.submitted_at|date:"d/m/Y H:i" }}
+- Statut actuel: {{ application.get_status_display }}
+
+Prochaines étapes:
+Votre demande va maintenant être examinée par nos services consulaires. Vous recevrez des notifications par email à chaque étape importante du processus.
+
+Vous pouvez suivre l'avancement de votre demande en vous connectant à votre espace personnel.
+
+Si vous avez des questions, n'hésitez pas à nous contacter.
+
+Cordialement,
+L'équipe consulaire
+{{ site_name }}

@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: embassy_db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-embassy_db}
+      POSTGRES_USER: ${DB_USER:-embassy_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-change_this_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-embassy_user}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - embassy_network
+
+  # Backend Django
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: embassy_backend
+    command: gunicorn embassy_backend.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    volumes:
+      - ./backend:/app
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - embassy_network
+    restart: unless-stopped
+
+  # Worker Django-Q (tâches asynchrones)
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: embassy_worker
+    command: python manage.py qcluster
+    volumes:
+      - ./backend:/app
+      - media_volume:/app/media
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - db
+      - backend
+    networks:
+      - embassy_network
+    restart: unless-stopped
+
+  # Frontend React (build statique servi par Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: embassy_frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./ssl:/etc/nginx/ssl:ro
+      - static_volume:/var/www/static:ro
+      - media_volume:/var/www/media:ro
+    depends_on:
+      - backend
+    networks:
+      - embassy_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+
+networks:
+  embassy_network:
+    driver: bridge
+

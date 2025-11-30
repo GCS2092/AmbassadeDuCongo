@@ -1,0 +1,13 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fond avec coins arrondis -->
+  <rect width="192" height="192" rx="24" fill="#ffffff"/>
+  
+  <!-- Bande VERTE (en haut) -->
+  <polygon points="0,0 192,0 192,64 0,64" fill="#009639"/>
+  
+  <!-- Bande JAUNE (au milieu) -->
+  <polygon points="0,64 192,64 192,128 0,128" fill="#FCD116"/>
+  
+  <!-- Bande ROUGE (en bas) -->
+  <polygon points="0,128 192,128 192,192 0,192" fill="#DC143C"/>
+</svg>

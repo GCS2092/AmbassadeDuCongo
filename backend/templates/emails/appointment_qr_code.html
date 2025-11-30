@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de rendez-vous</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #009639;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .content {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 0 0 10px 10px;
+        }
+        .qr-code {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .qr-code img {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            max-width: 300px;
+        }
+        .appointment-details {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #009639;
+        }
+        .instructions {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .embassy-info {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏛️ Ambassade de la République du Congo</h1>
+        <h2>Confirmation de rendez-vous</h2>
+    </div>
+    
+    <div class="content">
+        <p>Bonjour <strong>{{ user_name }}</strong>,</p>
+        
+        <p>Votre rendez-vous a été confirmé avec succès. Voici les détails :</p>
+        
+        <div class="appointment-details">
+            <h3>📅 Détails du rendez-vous</h3>
+            <div class="detail-row">
+                <span class="detail-label">Date :</span>
+                <span>{{ appointment_date }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Heure :</span>
+                <span>{{ appointment_time }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Service :</span>
+                <span>{{ service_name }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Bureau :</span>
+                <span>{{ office_name }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Référence :</span>
+                <span>{{ appointment_id }}</span>
+            </div>
+        </div>
+        
+        <div class="qr-code">
+            <h3>📱 Votre QR Code d'accès</h3>
+            <img src="{{ qr_code_data_url }}" alt="QR Code du rendez-vous">
+            <p><strong>Présentez ce QR code à la réception de l'ambassade</strong></p>
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 Instructions importantes</h3>
+            <ul>
+                <li>Arrivez <strong>15 minutes avant</strong> l'heure de votre rendez-vous</li>
+                <li>Apportez une <strong>pièce d'identité valide</strong></li>
+                <li>Présentez ce QR code à la réception</li>
+                <li>Gardez ce QR code jusqu'à la fin de votre visite</li>
+            </ul>
+        </div>
+        
+        <div class="embassy-info">
+            <h3>📍 Informations de contact</h3>
+            <p><strong>{{ embassy_name }}</strong></p>
+            <p>{{ embassy_address }}</p>
+            <p>📞 {{ embassy_phone }}</p>
+            <p>📧 {{ embassy_email }}</p>
+        </div>
+        
+        <p>Si vous avez des questions, n'hésitez pas à nous contacter.</p>
+        
+        <p>Cordialement,<br>
+        <strong>L'équipe de l'Ambassade</strong></p>
+    </div>
+    
+    <div class="footer">
+        <p>Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</p>
+        <p>Ambassade de la République du Congo - Sénégal</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre QR Code personnel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #009639;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .content {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 0 0 10px 10px;
+        }
+        .qr-code {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .qr-code img {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            max-width: 300px;
+        }
+        .user-info {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #009639;
+        }
+        .instructions {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .embassy-info {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏛️ Ambassade de la République du Congo</h1>
+        <h2>Votre QR Code personnel</h2>
+    </div>
+    
+    <div class="content">
+        <p>Bonjour <strong>{{ user_name }}</strong>,</p>
+        
+        <p>Votre QR code personnel a été généré avec succès. Ce code vous permettra d'accéder rapidement aux services consulaires.</p>
+        
+        <div class="user-info">
+            <h3>👤 Vos informations</h3>
+            <div class="detail-row">
+                <span class="detail-label">Nom :</span>
+                <span>{{ user_name }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Email :</span>
+                <span>{{ user_email }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Rôle :</span>
+                <span>{{ user_role }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Généré le :</span>
+                <span>{{ generated_at }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Valide jusqu'au :</span>
+                <span>{{ valid_until }}</span>
+            </div>
+        </div>
+        
+        <div class="qr-code">
+            <h3>📱 Votre QR Code personnel</h3>
+            <img src="{{ qr_code_data_url }}" alt="QR Code personnel">
+            <p><strong>Utilisez ce QR code pour votre identification</strong></p>
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 Comment utiliser votre QR code</h3>
+            <ul>
+                <li><strong>Identification rapide :</strong> Présentez ce QR code pour une vérification d'identité instantanée</li>
+                <li><strong>Rendez-vous :</strong> Scannez votre QR code lors de vos rendez-vous à l'ambassade</li>
+                <li><strong>Sécurité :</strong> Ce QR code est personnel et ne doit pas être partagé</li>
+                <li><strong>Validité :</strong> Votre QR code est valide pendant 1 an</li>
+                <li><strong>Régénération :</strong> Vous pouvez régénérer votre QR code à tout moment</li>
+            </ul>
+        </div>
+        
+        <div class="embassy-info">
+            <h3>📍 Informations de contact</h3>
+            <p><strong>{{ embassy_name }}</strong></p>
+            <p>{{ embassy_address }}</p>
+            <p>📞 {{ embassy_phone }}</p>
+            <p>📧 {{ embassy_email }}</p>
+        </div>
+        
+        <p>Si vous avez des questions, n'hésitez pas à nous contacter.</p>
+        
+        <p>Cordialement,<br>
+        <strong>L'équipe de l'Ambassade</strong></p>
+    </div>
+    
+    <div class="footer">
+        <p>Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</p>
+        <p>Ambassade de la République du Congo - Sénégal</p>
+    </div>
+</body>
+</html>

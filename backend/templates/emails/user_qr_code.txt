@@ -1,0 +1,38 @@
+VOTRE QR CODE PERSONNEL
+Ambassade de la République du Congo - Sénégal
+
+Bonjour {{ user_name }},
+
+Votre QR code personnel a été généré avec succès. Ce code vous permettra d'accéder rapidement aux services consulaires.
+
+VOS INFORMATIONS :
+- Nom : {{ user_name }}
+- Email : {{ user_email }}
+- Rôle : {{ user_role }}
+- Généré le : {{ generated_at }}
+- Valide jusqu'au : {{ valid_until }}
+
+VOTRE QR CODE PERSONNEL :
+Un QR code a été généré pour votre identification personnelle.
+
+COMMENT UTILISER VOTRE QR CODE :
+- Identification rapide : Présentez ce QR code pour une vérification d'identité instantanée
+- Rendez-vous : Scannez votre QR code lors de vos rendez-vous à l'ambassade
+- Sécurité : Ce QR code est personnel et ne doit pas être partagé
+- Validité : Votre QR code est valide pendant 1 an
+- Régénération : Vous pouvez régénérer votre QR code à tout moment
+
+INFORMATIONS DE CONTACT :
+{{ embassy_name }}
+{{ embassy_address }}
+Téléphone : {{ embassy_phone }}
+Email : {{ embassy_email }}
+
+Si vous avez des questions, n'hésitez pas à nous contacter.
+
+Cordialement,
+L'équipe de l'Ambassade
+
+---
+Cet email a été envoyé automatiquement. Merci de ne pas y répondre.
+Ambassade de la République du Congo - Sénégal

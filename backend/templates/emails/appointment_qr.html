@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code de Rendez-vous - Ambassade du Congo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #1e40af;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 28px;
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+        .appointment-details {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #1e40af;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: #374151;
+        }
+        .detail-value {
+            color: #1f2937;
+        }
+        .qr-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f0f9ff;
+            border-radius: 8px;
+        }
+        .qr-title {
+            font-size: 20px;
+            color: #1e40af;
+            margin-bottom: 15px;
+        }
+        .instructions {
+            background-color: #fef3c7;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #f59e0b;
+        }
+        .instructions h3 {
+            color: #92400e;
+            margin-top: 0;
+        }
+        .instructions ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin-bottom: 8px;
+            color: #92400e;
+        }
+        .embassy-info {
+            background-color: #f3f4f6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .embassy-info h3 {
+            color: #374151;
+            margin-top: 0;
+        }
+        .embassy-info p {
+            margin: 5px 0;
+            color: #6b7280;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        .urgent {
+            background-color: #fee2e2;
+            border-left: 4px solid #ef4444;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .urgent h3 {
+            color: #dc2626;
+            margin-top: 0;
+        }
+        .urgent p {
+            color: #991b1b;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🇨🇬 Ambassade du Congo</div>
+            <div class="title">Votre QR Code de Rendez-vous</div>
+            <div class="subtitle">République du Congo - Sénégal</div>
+        </div>
+
+        <!-- Greeting -->
+        <p>Bonjour <strong>{{ user_name }}</strong>,</p>
+        
+        <p>Votre rendez-vous consulaire a été confirmé avec succès. Vous trouverez ci-joint votre QR code personnalisé.</p>
+
+        <!-- Appointment Details -->
+        <div class="appointment-details">
+            <h3 style="color: #1e40af; margin-top: 0;">📅 Détails de votre rendez-vous</h3>
+            
+            <div class="detail-row">
+                <span class="detail-label">ID du rendez-vous :</span>
+                <span class="detail-value"><strong>#{{ appointment_id }}</strong></span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="detail-label">Date :</span>
+                <span class="detail-value"><strong>{{ appointment_date }}</strong></span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="detail-label">Heure :</span>
+                <span class="detail-value"><strong>{{ appointment_time }}</strong></span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="detail-label">Service :</span>
+                <span class="detail-value"><strong>{{ service }}</strong></span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="detail-label">Bureau :</span>
+                <span class="detail-value"><strong>{{ office }}</strong></span>
+            </div>
+        </div>
+
+        <!-- QR Code Section -->
+        <div class="qr-section">
+            <div class="qr-title">📱 Votre QR Code</div>
+            <p>Votre QR code est attaché à cet email. Il contient toutes les informations nécessaires pour votre rendez-vous.</p>
+            <p><strong>Instructions :</strong> Présentez ce QR code à la réception de l'ambassade pour confirmer votre identité.</p>
+        </div>
+
+        <!-- Important Instructions -->
+        <div class="instructions">
+            <h3>⚠️ Instructions importantes</h3>
+            <ul>
+                <li><strong>Arrivez 15 minutes avant</strong> l'heure de votre rendez-vous</li>
+                <li><strong>Apportez une pièce d'identité valide</strong> (passeport, carte d'identité)</li>
+                <li><strong>Gardez ce QR code</strong> jusqu'à votre visite</li>
+                <li><strong>Le QR code est valide</strong> pendant 7 jours à partir d'aujourd'hui</li>
+                <li><strong>En cas de problème</strong>, contactez-nous immédiatement</li>
+            </ul>
+        </div>
+
+        <!-- Embassy Contact Info -->
+        <div class="embassy-info">
+            <h3>📞 Contact Ambassade</h3>
+            <p><strong>Nom :</strong> {{ embassy_name }}</p>
+            <p><strong>Adresse :</strong> {{ embassy_address }}</p>
+            <p><strong>Téléphone :</strong> {{ embassy_phone }}</p>
+            <p><strong>Email :</strong> {{ embassy_email }}</p>
+        </div>
+
+        <!-- Urgent Notice -->
+        <div class="urgent">
+            <h3>🚨 En cas d'urgence</h3>
+            <p>Si vous ne pouvez pas vous présenter à votre rendez-vous, contactez-nous <strong>immédiatement</strong> pour reprogrammer.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Merci de votre confiance en l'Ambassade de la République du Congo au Sénégal.</p>
+            <p>Cet email a été généré automatiquement. Ne pas répondre directement.</p>
+            <p><em>© 2024 Ambassade de la République du Congo - Sénégal</em></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+Nouvelle demande reçue - {{ application.reference_number }}
+
+Bonjour,
+
+Une nouvelle demande consulaire a été soumise et nécessite votre attention.
+
+Détails de la demande:
+- Référence: {{ application.reference_number }}
+- Type: {{ application.get_application_type_display }}
+- Service: {{ application.service_type.name }}
+- Demandeur: {{ applicant.get_full_name }}
+- Email: {{ applicant.email }}
+- Date de soumission: {{ application.submitted_at|date:"d/m/Y H:i" }}
+
+Informations du demandeur:
+- Nom complet: {{ applicant.get_full_name }}
+- Email: {{ applicant.email }}
+- Téléphone: {{ applicant.phone|default:"Non renseigné" }}
+
+{% if application.applicant_notes %}
+Notes du demandeur:
+{{ application.applicant_notes }}
+{% endif %}
+
+Veuillez traiter cette demande dans les plus brefs délais.
+
+Cordialement,
+{{ site_name }}

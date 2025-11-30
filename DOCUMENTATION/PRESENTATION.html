@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ambassade du Congo au Sénégal — Documentation Complète</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#006a4e',
+            accent: '#e63946',
+            congo: {
+              green: '#009543',
+              yellow: '#fbde4a',
+              red: '#dc241f'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+  <!-- Header -->
+  <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex items-center gap-4">
+        <span class="text-5xl">🇨🇬</span>
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900">Ambassade du Congo au Sénégal</h1>
+          <p class="text-sm text-gray-600 mt-1">Documentation Technique Complète</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full">v1.0.0</span>
+        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">Octobre 2025</span>
+        <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-semibold rounded-full">Django + React</span>
+        <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full">PWA Ready</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Présentation -->
+    <section class="bg-white rounded-xl shadow-md p-6 mb-8 border border-gray-200">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <span class="text-blue-600">📋</span> Présentation Générale
+      </h2>
+      <div class="space-y-3 text-gray-700">
+        <p><strong class="text-gray-900">Projet:</strong> Application Web Progressive (PWA) pour la gestion des services consulaires de l'Ambassade du Congo au Sénégal.</p>
+        <p><strong class="text-gray-900">Objectif:</strong> Digitaliser et sécuriser les démarches consulaires (rendez-vous, dossiers, paiements, notifications) avec une expérience moderne, mobile-first et hors-ligne.</p>
+        <p><strong class="text-gray-900">Statut:</strong> <span class="inline-flex items-center px-2 py-1 bg-green-100 text-green-800 text-sm font-medium rounded">Production-ready</span></p>
+      </div>
+    </section>
+
+    <!-- Publics Ciblés -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+        <span class="text-purple-600">👥</span> Publics Ciblés
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-md p-6 border border-blue-200 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold text-blue-900 mb-4 flex items-center gap-2">
+            <span>👨‍💼</span> Citoyens / Usagers
+          </h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start gap-2">
+              <span class="text-blue-600 mt-1">✓</span>
+              <span>Prise de rendez-vous</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-600 mt-1">✓</span>
+              <span>Dépôt de demandes (visa, passeport, légalisation…)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-600 mt-1">✓</span>
+              <span>Suivi de statut et notifications</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-600 mt-1">✓</span>
+              <span>Paiement en ligne</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-gradient-to-br from-primary/10 to-primary/20 rounded-xl shadow-md p-6 border border-primary/30 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold text-primary mb-4 flex items-center gap-2">
+            <span>⚙️</span> Administration / Agents
+          </h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start gap-2">
+              <span class="text-primary mt-1">✓</span>
+              <span>Gestion des plannings et rendez-vous</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary mt-1">✓</span>
+              <span>Traitement et validation des dossiers</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary mt-1">✓</span>
+              <span>Émission de reçus et audit</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary mt-1">✓</span>
+              <span>Gestion des utilisateurs et rôles</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fonctionnalités -->
+    <section class="bg-white rounded-xl shadow-md p-6 mb-8 border border-gray-200">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+        <span class="text-green-600">🚀</span> Fonctionnalités Clés
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <span class="text-2xl">📅</span>
+          <span class="text-gray-700">Rendez-vous en ligne avec QR code</span>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <span class="text-2xl">📁</span>
+          <span class="text-gray-700">Soumission de dossiers sécurisée</span>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <span class="text-2xl">📊</span>
+          <span class="text-gray-700">Suivi temps réel des dossiers</span>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <span class="text-2xl">💳</span>
+          <span class="text-gray-700">Paiements en ligne via Stripe</span>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <span class="text-2xl">🔔</span>
+          <span class="text-gray-700">Notifications Email/SMS/Push</span>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <span class="text-2xl">📱</span>
+          <span class="text-gray-700">Mode hors-ligne (PWA)</span>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <span class="text-2xl">📈</span>
+          <span class="text-gray-700">Tableau de bord analytique</span>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <span class="text-2xl">📄</span>
+          <span class="text-gray-700">Export PDF/Excel</span>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <span class="text-2xl">🔒</span>
+          <span class="text-gray-700">Journal d'audit & RBAC</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+        <span class="text-indigo-600">🏗️</span> Architecture Technique
+      </h2>
+      
+      <!-- Backend -->
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-200">
+        <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="text-green-600">🔧</span> Backend (Django)
+        </h3>
+        <div class="bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-500 p-4 rounded-r-lg mb-4">
+          <p class="text-sm text-gray-700"><strong>Stack:</strong> Django 4.2 LTS + Django REST Framework</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <h4 class="font-semibold text-gray-800 mb-2">🔐 Authentification</h4>
+            <ul class="text-sm text-gray-600 space-y-1 ml-4">
+              <li>• JWT (SimpleJWT)</li>
+              <li>• 2FA (django-otp)</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-800 mb-2">⚡ Tâches Async</h4>
+            <ul class="text-sm text-gray-600 space-y-1 ml-4">
+              <li>• django-q2 (broker ORM)</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-800 mb-2">🗄️ Base de données</h4>
+            <ul class="text-sm text-gray-600 space-y-1 ml-4">
+              <li>• PostgreSQL (prod)</li>
+              <li>• SQLite (dev via USE_SQLITE)</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-800 mb-2">💰 Paiements</h4>
+            <ul class="text-sm text-gray-600 space-y-1 ml-4">
+              <li>• Stripe (clés + webhook)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-4 p-3 bg-gray-50 rounded-lg">
+          <p class="text-xs text-gray-600"><strong>Modules principaux:</strong> <code class="bg-gray-200 px-2 py-1 rounded text-xs">embassy_backend/</code>, <code class="bg-gray-200 px-2 py-1 rounded text-xs">users/</code>, <code class="bg-gray-200 px-2 py-1 rounded text-xs">appointments/</code>, <code class="bg-gray-200 px-2 py-1 rounded text-xs">payments/</code>, <code class="bg-gray-200 px-2 py-1 rounded text-xs">notifications/</code></p>
+        </div>
+      </div>
+
+      <!-- Frontend -->
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 border border-gray-200">
+        <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="text-blue-600">⚛️</span> Frontend (React + Vite)
+        </h3>
+        <div class="bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4">
+          <p class="text-sm text-gray-700"><strong>Stack:</strong> React 18, TypeScript, Vite, TailwindCSS</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="p-3 bg-blue-50 rounded-lg">
+            <h4 class="font-semibold text-blue-900 mb-2">State Management</h4>
+            <p class="text-gray-700">Zustand</p>
+          </div>
+          <div class="p-3 bg-purple-50 rounded-lg">
+            <h4 class="font-semibold text-purple-900 mb-2">Data Fetching</h4>
+            <p class="text-gray-700">React Query + Axios</p>
+          </div>
+          <div class="p-3 bg-green-50 rounded-lg">
+            <h4 class="font-semibold text-green-900 mb-2">PWA</h4>
+            <p class="text-gray-700">Workbox, Service Worker</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Déploiement -->
+      <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+        <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="text-orange-600">🚀</span> Déploiement / Infrastructure
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-orange-100 text-orange-800 text-sm rounded-full">Nginx (TLS)</span>
+          <span class="px-3 py-1 bg-red-100 text-red-800 text-sm rounded-full">Gunicorn</span>
+          <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm rounded-full">systemd</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">PostgreSQL 15</span>
+          <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm rounded-full">S3 (optionnel)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sécurité -->
+    <section class="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl shadow-md p-6 mb-8 border border-red-200">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+        <span class="text-red-600">🔒</span> Sécurité
+      </h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="flex items-start gap-2">
+          <span class="text-green-600 font-bold mt-1">✓</span>
+          <span class="text-gray-700">HTTPS obligatoire (Let's Encrypt)</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-green-600 font-bold mt-1">✓</span>
+          <span class="text-gray-700">CSP/HSTS/XSS Protection</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-green-600 font-bold mt-1">✓</span>
+          <span class="text-gray-700">JWT avec rotation et blacklist</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-green-600 font-bold mt-1">✓</span>
+          <span class="text-gray-700">Throttling DRF (anon/user)</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-green-600 font-bold mt-1">✓</span>
+          <span class="text-gray-700">RBAC et permissions DRF</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-green-600 font-bold mt-1">✓</span>
+          <span class="text-gray-700">Validation d'uploads stricte</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-green-600 font-bold mt-1">✓</span>
+          <span class="text-gray-700">Cookies sécurisés (Secure, SameSite)</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-green-600 font-bold mt-1">✓</span>
+          <span class="text-gray-700">Audit et journalisation complète</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modèles de données -->
+    <section class="bg-white rounded-xl shadow-md p-6 mb-8 border border-gray-200">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+        <span class="text-cyan-600">🗃️</span> Modèles de Données
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="p-4 border-2 border-cyan-200 rounded-lg hover:border-cyan-400 transition-colors">
+          <h4 class="font-bold text-cyan-900 mb-2">User</h4>
+          <p class="text-sm text-gray-600">Utilisateurs, rôles, 2FA</p>
+        </div>
+        <div class="p-4 border-2 border-blue-200 rounded-lg hover:border-blue-400 transition-colors">
+          <h4 class="font-bold text-blue-900 mb-2">Appointment</h4>
+          <p class="text-sm text-gray-600">Créneaux, QR code, statut</p>
+        </div>
+        <div class="p-4 border-2 border-purple-200 rounded-lg hover:border-purple-400 transition-colors">
+          <h4 class="font-bold text-purple-900 mb-2">Application/Case</h4>
+          <p class="text-sm text-gray-600">Dossiers, pièces, historique</p>
+        </div>
+        <div class="p-4 border-2 border-green-200 rounded-lg hover:border-green-400 transition-colors">
+          <h4 class="font-bold text-green-900 mb-2">Payment</h4>
+          <p class="text-sm text-gray-600">Montants, devise, Stripe</p>
+        </div>
+        <div class="p-4 border-2 border-orange-200 rounded-lg hover:border-orange-400 transition-colors">
+          <h4 class="font-bold text-orange-900 mb-2">Notification</h4>
+          <p class="text-sm text-gray-600">Canaux, payload, statut</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technologies -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+        <span class="text-pink-600">🛠️</span> Technologies & Versions
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gradient-to-br from-green-100 to-green-50 rounded-xl shadow-md p-6 border border-green-300">
+          <h3 class="text-lg font-bold text-green-900 mb-4">Backend</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2 py-1 bg-white text-green-800 text-xs font-medium rounded shadow-sm">Django 4.2</span>
+            <span class="px-2 py-1 bg-white text-green-800 text-xs font-medium rounded shadow-sm">DRF</span>
+            <span class="px-2 py-1 bg-white text-green-800 text-xs font-medium rounded shadow-sm">SimpleJWT</span>
+            <span class="px-2 py-1 bg-white text-green-800 text-xs font-medium rounded shadow-sm">django-q2</span>
+            <span class="px-2 py-1 bg-white text-green-800 text-xs font-medium rounded shadow-sm">Stripe</span>
+            <span class="px-2 py-1 bg-white text-green-800 text-xs font-medium rounded shadow-sm">SendGrid</span>
+            <span class="px-2 py-1 bg-white text-green-800 text-xs font-medium rounded shadow-sm">Twilio</span>
+            <span class="px-2 py-1 bg-white text-green-800 text-xs font-medium rounded shadow-sm">pytest</span>
+          </div>
+        </div>
+        <div class="bg-gradient-to-br from-blue-100 to-blue-50 rounded-xl shadow-md p-6 border border-blue-300">
+          <h3 class="text-lg font-bold text-blue-900 mb-4">Frontend</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2 py-1 bg-white text-blue-800 text-xs font-medium rounded shadow-sm">React 18</span>
+            <span class="px-2 py-1 bg-white text-blue-800 text-xs font-medium rounded shadow-sm">TypeScript</span>
+            <span class="px-2 py-1 bg-white text-blue-800 text-xs font-medium rounded shadow-sm">Vite 5</span>
+            <span class="px-2 py-1 bg-white text-blue-800 text-xs font-medium rounded shadow-sm">TailwindCSS 3</span>
+            <span class="px-2 py-1 bg-white text-blue-800 text-xs font-medium rounded shadow-sm">React Query</span>
+            <span class="px-2 py-1 bg-white text-blue-800 text-xs font-medium rounded shadow-sm">Zustand</span>
+            <span class="px-2 py-1 bg-white text-blue-800 text-xs font-medium rounded shadow-sm">Workbox</span>
+            <span class="px-2 py-1 bg-white text-blue-800 text-xs font-medium rounded shadow-sm">Vitest</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PWA -->
+    <section class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl shadow-md p-6 mb-8 border border-purple-200">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+        <span class="text-purple-600">📱</span> PWA & Expérience Utilisateur
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h4 class="font-semibold text-purple-900 mb-3">✨ Fonctionnalités PWA</h4>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Installable (manifest, icônes, service worker)</li>
+            <li>• Mode hors-ligne avec cache intelligent</li>
+            <li>• Performance optimisée (Vite build)</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-pink-900 mb-3">♿ Accessibilité</h4>
+          <ul class="space-y-2 text-gray-700">
+            <li>• ARIA et contrastes respectés</li>
+            <li>• Design responsive mobile-first</li>
+            <li>• Images optimisées et lazy loading</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="bg-white rounded-xl shadow-md p-6 mb-8 border border-gray-200">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+        <span class="text-yellow-600">🗺️</span> Roadmap
+      </h2>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3 p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+          <span class="text-2xl">💰</span>
+          <span class="text-gray-700">Intégration Mobile Money native</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+          <span class="text-2xl">🔌</span>
+          <span class="text-gray-700">Portail API publique (OpenAPI)</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+          <span class="text-2xl">⚙️</span>
+          <span class="text-gray-700">Moteur de règles pour workflows avancés</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
+          <span class="text-2xl">⚡</span>
+          <span class="text-gray-700">Temps réel (WebSocket/SSE)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Références -->
+    <section class="bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl shadow-md p-6 border border-gray-700">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+        <span>📚</span> Références & Documentation
+      </h2>
+      <div class="grid md:grid-cols-3 gap-4 text-sm">
+        <div>
+          <h4 class="font-semibold mb-2 text-blue-300">📖 Guides</h4>
+          <ul class="space-y-1 text-gray-300">
+            <li>• README.md</li>
+            <li>• START_HERE.md</li>
+            <li>• QUICK_START.md</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-2 text-green-300">📁 Documentation</h4>
+          <ul class="space-y-1 text-gray-300">
+            <li>• docs/API</li>
+            <li>• docs/DEPLOYMENT</li>
+            <li>• docs/Security</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-2 text-purple-300">🚀 Déploiement</h4>
+          <ul class="space-y-1 text-gray-300">
+            <li>• deployment/scripts/</li>
+            <li>• deployment/nginx/</li>
+            <li>• systemd services</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-200 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-gray-600 text-sm">© 2025 Ambassade de la République du Congo au Sénégal — Documentation technique interne</p>
+        <div class="flex gap-4 text-sm">
+          <span class="px-3 py-1 bg-congo-green text-white rounded-full font-medium">Production Ready</span>
+          <span class="px-3 py-1 bg-primary text-white rounded-full font-medium">v1.0.0</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll pour les ancres
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Animation d'entrée au scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('section').forEach(section => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(20px)';
+      section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rappel d'expiration de document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #f59e0b;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .content {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 0 0 10px 10px;
+        }
+        .alert {
+            background-color: #fff3cd;
+            border: 2px solid #f59e0b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .document-info {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #f59e0b;
+        }
+        .button {
+            display: inline-block;
+            background-color: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚠️ Rappel Important</h1>
+        <h2>Votre document expire bientôt</h2>
+    </div>
+    
+    <div class="content">
+        <p>Bonjour <strong>{{ user.get_full_name }}</strong>,</p>
+        
+        <div class="alert">
+            <h2>⚠️ Attention : Document qui expire</h2>
+            <p><strong>{{ document.name }}</strong> expire le <strong>{{ expiry_date|date:"d/m/Y" }}</strong></p>
+            <p>Il vous reste <strong>{{ days_remaining }} jour(s)</strong> pour le renouveler.</p>
+        </div>
+        
+        <div class="document-info">
+            <h3>📄 Informations du document</h3>
+            <div class="detail-row">
+                <span class="detail-label">Type :</span>
+                <span>{{ document.get_document_type_display }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Date d'expiration :</span>
+                <span>{{ expiry_date|date:"d/m/Y" }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Jours restants :</span>
+                <span>{{ days_remaining }} jour(s)</span>
+            </div>
+        </div>
+        
+        <p>Nous vous rappelons de renouveler ce document dès que possible pour éviter tout problème.</p>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <a href="https://ambassade-congo.sn/appointments" class="button">
+                📅 Prendre un rendez-vous pour renouveler
+            </a>
+        </div>
+        
+        <div class="alert">
+            <h3>💡 Conseils :</h3>
+            <ul>
+                <li>Renouvelez vos documents 2-3 mois avant l'expiration</li>
+                <li>Préparez tous les documents nécessaires à l'avance</li>
+                <li>Vérifiez les horaires d'ouverture de l'ambassade</li>
+            </ul>
+        </div>
+        
+        <p>Pour toute question, n'hésitez pas à nous contacter.</p>
+        
+        <p>Cordialement,<br>
+        <strong>L'équipe de l'Ambassade du Congo</strong></p>
+    </div>
+    
+    <div class="footer">
+        <p>Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</p>
+        <p>Ambassade de la République du Congo - Sénégal</p>
+    </div>
+</body>
+</html>

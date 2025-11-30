@@ -1,0 +1,37 @@
+CONFIRMATION DE RENDEZ-VOUS
+Ambassade de la République du Congo - Sénégal
+
+Bonjour {{ user_name }},
+
+Votre rendez-vous a été confirmé avec succès. Voici les détails :
+
+DÉTAILS DU RENDEZ-VOUS :
+- Date : {{ appointment_date }}
+- Heure : {{ appointment_time }}
+- Service : {{ service_name }}
+- Bureau : {{ office_name }}
+- Référence : {{ appointment_id }}
+
+VOTRE QR CODE D'ACCÈS :
+Un QR code a été généré pour votre rendez-vous. Présentez-le à la réception de l'ambassade.
+
+INSTRUCTIONS IMPORTANTES :
+- Arrivez 15 minutes avant l'heure de votre rendez-vous
+- Apportez une pièce d'identité valide
+- Présentez votre QR code à la réception
+- Gardez votre QR code jusqu'à la fin de votre visite
+
+INFORMATIONS DE CONTACT :
+{{ embassy_name }}
+{{ embassy_address }}
+Téléphone : {{ embassy_phone }}
+Email : {{ embassy_email }}
+
+Si vous avez des questions, n'hésitez pas à nous contacter.
+
+Cordialement,
+L'équipe de l'Ambassade
+
+---
+Cet email a été envoyé automatiquement. Merci de ne pas y répondre.
+Ambassade de la République du Congo - Sénégal

@@ -1,0 +1,28 @@
+{{ site_name }}
+Ambassade de la République du Congo au Sénégal
+
+Bonjour {{ user.first_name }},
+
+Votre rendez-vous a été confirmé avec succès.
+
+DÉTAILS DU RENDEZ-VOUS
+----------------------
+Référence: {{ appointment.reference_number }}
+Date: {{ appointment.appointment_date|date:"l d F Y" }}
+Heure: {{ appointment.appointment_time|time:"H:i" }}
+Service: {{ appointment.service_type.name }}
+Bureau: {{ appointment.office.name }}
+Adresse: {{ appointment.office.full_address }}
+
+IMPORTANT:
+- Veuillez arriver 15 minutes avant l'heure du rendez-vous
+- Munissez-vous de tous les documents requis
+- Présentez votre QR code à la réception
+
+Cordialement,
+L'équipe de l'Ambassade
+
+Ambassade de la République du Congo
+Stèle Mermoz, Pyrotechnie, Dakar
+Tél: +221 824 8398
+

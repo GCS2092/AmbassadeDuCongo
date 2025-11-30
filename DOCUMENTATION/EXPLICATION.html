@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation PWA Ambassade du Congo au Sénégal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .section-card {
+            transition: all 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-4xl font-bold mb-2">PWA Ambassade du Congo au Sénégal</h1>
+            <p class="text-blue-100 text-lg">Documentation Technique Complète</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex overflow-x-auto py-4 space-x-4">
+                <a href="#overview" class="whitespace-nowrap px-4 py-2 rounded-lg hover:bg-blue-50 transition">Vue d'ensemble</a>
+                <a href="#components" class="whitespace-nowrap px-4 py-2 rounded-lg hover:bg-blue-50 transition">Composants</a>
+                <a href="#flux" class="whitespace-nowrap px-4 py-2 rounded-lg hover:bg-blue-50 transition">Flux de données</a>
+                <a href="#integrations" class="whitespace-nowrap px-4 py-2 rounded-lg hover:bg-blue-50 transition">Intégrations</a>
+                <a href="#commands" class="whitespace-nowrap px-4 py-2 rounded-lg hover:bg-blue-50 transition">Commandes</a>
+                <a href="#frontend" class="whitespace-nowrap px-4 py-2 rounded-lg hover:bg-blue-50 transition">Frontend</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Vue d'ensemble -->
+        <section id="overview" class="mb-12 section-card bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-blue-500 pb-2">1. Vue d'ensemble</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4">Backend</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">▸</span>
+                            <span><strong>Django 4.2</strong> + Django REST Framework</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">▸</span>
+                            <span><strong>Tâches asynchrones:</strong> django-q</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">▸</span>
+                            <span><strong>Stockage:</strong> django-storages + boto3 (S3)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">▸</span>
+                            <span><strong>Paiement:</strong> Stripe</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-indigo-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-indigo-800 mb-4">Frontend</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-indigo-600 mr-2">▸</span>
+                            <span><strong>React 18</strong> + TypeScript</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-indigo-600 mr-2">▸</span>
+                            <span><strong>Bundler:</strong> Vite</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-indigo-600 mr-2">▸</span>
+                            <span><strong>State:</strong> Zustand</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-indigo-600 mr-2">▸</span>
+                            <span><strong>Data fetching:</strong> React Query</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Composants -->
+        <section id="components" class="mb-12 section-card bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-green-500 pb-2">2. Composants Backend</h2>
+            <div class="space-y-4">
+                <div class="border-l-4 border-green-500 pl-4 py-2">
+                    <h4 class="font-semibold text-lg text-gray-800">core/</h4>
+                    <p class="text-gray-600">Modèles d'infrastructure (ConsularOffice, ServiceType, Announcement, FAQ, AuditLog), utilitaires d'export (CSV/Excel), permissions et middleware.</p>
+                </div>
+                <div class="border-l-4 border-blue-500 pl-4 py-2">
+                    <h4 class="font-semibold text-lg text-gray-800">applications/</h4>
+                    <p class="text-gray-600">Gestion des demandes consulaires (Application, Document, VisaApplication, PassportApplication), génération de référence, calcul de frais.</p>
+                </div>
+                <div class="border-l-4 border-purple-500 pl-4 py-2">
+                    <h4 class="font-semibold text-lg text-gray-800">appointments/</h4>
+                    <p class="text-gray-600">Créneaux et rendez-vous (Appointment, AppointmentSlot), génération QR code, logique d'annulation et check-in.</p>
+                </div>
+                <div class="border-l-4 border-orange-500 pl-4 py-2">
+                    <h4 class="font-semibold text-lg text-gray-800">notifications/</h4>
+                    <p class="text-gray-600">Tâches et utilitaires d'envoi (email, SMS, push) — intégration avec django-q.</p>
+                </div>
+                <div class="border-l-4 border-red-500 pl-4 py-2">
+                    <h4 class="font-semibold text-lg text-gray-800">payments/</h4>
+                    <p class="text-gray-600">Modèles et endpoints liés aux paiements (Stripe + webhooks).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flux de données -->
+        <section id="flux" class="mb-12 section-card bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-purple-500 pb-2">3. Flux de données essentiels</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-purple-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-purple-800 mb-3">1) Soumission d'une demande</h3>
+                    <p class="text-gray-700 mb-3">Frontend assemble un payload JSON avec <code class="bg-purple-200 px-2 py-1 rounded">application_type</code>, <code class="bg-purple-200 px-2 py-1 rounded">service_type</code>, <code class="bg-purple-200 px-2 py-1 rounded">office</code>, etc.</p>
+                    <p class="text-gray-700">Backend <strong>ApplicationCreateSerializer</strong> valide les sous-objets, crée l'enregistrement, assigne l'utilisateur et récupère les frais.</p>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">2) Gestion des documents</h3>
+                    <p class="text-gray-700"><code class="bg-blue-200 px-2 py-1 rounded">Document</code> est uploadé via <strong>DocumentViewSet</strong>. Le serializer valide taille et extension. Les fichiers sont stockés avec un nom UUID.</p>
+                </div>
+
+                <div class="bg-green-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-green-800 mb-3">3) Rendez-vous et QR code</h3>
+                    <p class="text-gray-700"><code class="bg-green-200 px-2 py-1 rounded">Appointment</code> crée un <code class="bg-green-200 px-2 py-1 rounded">reference_number</code> (format APT-XXXXXXXX) et un QR code contenant les infos du rendez-vous.</p>
+                </div>
+
+                <div class="bg-orange-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-orange-800 mb-3">4) Transitions de statut</h3>
+                    <p class="text-gray-700"><strong>ApplicationViewSet.update_status</strong> valide les transitions autorisées. Exemples:</p>
+                    <ul class="mt-2 space-y-1 text-gray-700">
+                        <li>• DRAFT → [SUBMITTED, CANCELLED]</li>
+                        <li>• SUBMITTED → [UNDER_REVIEW, REJECTED, CANCELLED]</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Intégrations -->
+        <section id="integrations" class="mb-12 section-card bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-red-500 pb-2">4. Intégrations externes</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-gradient-to-r from-red-50 to-red-100 p-5 rounded-lg border-l-4 border-red-500">
+                    <h4 class="font-bold text-red-800 mb-2">🔒 Stripe</h4>
+                    <p class="text-gray-700 text-sm">Paiements et webhooks. Tester en mode test Stripe.</p>
+                </div>
+                <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-5 rounded-lg border-l-4 border-blue-500">
+                    <h4 class="font-bold text-blue-800 mb-2">📧 SendGrid</h4>
+                    <p class="text-gray-700 text-sm">Envoi d'emails (templates et envois asynchrones).</p>
+                </div>
+                <div class="bg-gradient-to-r from-green-50 to-green-100 p-5 rounded-lg border-l-4 border-green-500">
+                    <h4 class="font-bold text-green-800 mb-2">📱 Twilio</h4>
+                    <p class="text-gray-700 text-sm">SMS (rappels et notifications).</p>
+                </div>
+                <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-5 rounded-lg border-l-4 border-purple-500">
+                    <h4 class="font-bold text-purple-800 mb-2">☁️ S3</h4>
+                    <p class="text-gray-700 text-sm">Stockage des fichiers (documents, QR codes).</p>
+                </div>
+                <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-5 rounded-lg border-l-4 border-orange-500">
+                    <h4 class="font-bold text-orange-800 mb-2">⚙️ django-q</h4>
+                    <p class="text-gray-700 text-sm">Tâches en background (emails, reçus, rappels).</p>
+                </div>
+                <div class="bg-gradient-to-r from-indigo-50 to-indigo-100 p-5 rounded-lg border-l-4 border-indigo-500">
+                    <h4 class="font-bold text-indigo-800 mb-2">🔐 Sécurité</h4>
+                    <p class="text-gray-700 text-sm">CSP, HSTS, django-csp, django-axes, AuditLog.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Commandes -->
+        <section id="commands" class="mb-12 section-card bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-yellow-500 pb-2">5. Commandes développeur</h2>
+            
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                        <span class="bg-blue-500 text-white px-3 py-1 rounded mr-3">Backend</span>
+                        PowerShell
+                    </h3>
+                    <div class="code-block">
+<pre class="text-sm">python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r backend/requirements.txt
+cd backend
+python manage.py migrate
+python manage.py runserver
+
+# Tests et qualité
+pytest
+black .
+flake8 .</pre>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                        <span class="bg-indigo-500 text-white px-3 py-1 rounded mr-3">Frontend</span>
+                        PowerShell
+                    </h3>
+                    <div class="code-block">
+<pre class="text-sm">cd frontend
+npm install
+npm run dev
+npm run build
+npm run test
+npm run lint</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Frontend -->
+        <section id="frontend" class="mb-12 section-card bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-indigo-500 pb-2">6. Frontend détaillé</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-indigo-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-indigo-800 mb-4">Structure des fichiers</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><code class="bg-indigo-200 px-2 py-1 rounded">src/components/</code> : Composants réutilisables UI</li>
+                        <li><code class="bg-indigo-200 px-2 py-1 rounded">src/pages/</code> : Pages / routes</li>
+                        <li><code class="bg-indigo-200 px-2 py-1 rounded">src/lib/</code> : Client Axios, helpers</li>
+                        <li><code class="bg-indigo-200 px-2 py-1 rounded">src/store/</code> : Stores Zustand</li>
+                        <li><code class="bg-indigo-200 px-2 py-1 rounded">main.tsx</code> : Point d'entrée</li>
+                    </ul>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4">Pattern API</h3>
+                    <p class="text-gray-700 mb-3">API base URL via <code class="bg-blue-200 px-2 py-1 rounded">VITE_API_URL</code></p>
+                    <div class="code-block text-xs">
+<pre>// src/lib/api.ts
+import axios from 'axios'
+
+export const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || '/api',
+  withCredentials: true
+})
+
+// src/lib/queries.ts
+export function useApplications() {
+  return useQuery(['applications'], async () => {
+    const { data } = await api.get('/applications/')
+    return data
+  })
+}</pre>
+                    </div>
+                </div>
+
+                <div class="bg-green-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-green-800 mb-4">State Management</h3>
+                    <p class="text-gray-700"><strong>Zustand:</strong> État local/global (auth, UI flags)</p>
+                    <p class="text-gray-700"><strong>React Query:</strong> État serveur (données backend, mutations)</p>
+                </div>
+
+                <div class="bg-purple-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-purple-800 mb-4">PWA Configuration</h3>
+                    <p class="text-gray-700">Configuration dans <code class="bg-purple-200 px-2 py-1 rounded">vite.config.ts</code> (commentée). Utilise vite-plugin-pwa avec:</p>
+                    <ul class="mt-2 space-y-1 text-gray-700 text-sm">
+                        <li>• registerType: autoUpdate</li>
+                        <li>• NetworkFirst strategy pour API</li>
+                        <li>• Cache 24h pour appels API</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conventions -->
+        <section class="mb-12 section-card bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-pink-500 pb-2">7. Conventions de code</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-gray-800 mb-2">📁 Apps Django</h4>
+                    <p class="text-sm text-gray-600">Chaque app : models.py, serializers.py, views.py, urls.py, tests.py</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-gray-800 mb-2">🔒 Permissions</h4>
+                    <p class="text-sm text-gray-600">Classes personnalisées (IsAdmin, IsVigile, IsAgent)</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-gray-800 mb-2">📝 Logging/Audit</h4>
+                    <p class="text-sm text-gray-600">AuditLog pour toutes actions significatives</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-gray-800 mb-2">📤 Uploads</h4>
+                    <p class="text-sm text-gray-600">FileField + validation taille/extension + UUID</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checklist -->
+        <section class="mb-12 section-card bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold mb-6">✓ Checklist avant PR</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white bg-opacity-20 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Backend</h4>
+                    <ul class="space-y-1 text-sm">
+                        <li>☐ Migrations incluses si nécessaire</li>
+                        <li>☐ Tests pytest ajoutés</li>
+                        <li>☐ black . + flake8 .</li>
+                        <li>☐ AuditLog pour actions sensibles</li>
+                    </ul>
+                </div>
+                <div class="bg-white bg-opacity-20 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Frontend</h4>
+                    <ul class="space-y-1 text-sm">
+                        <li>☐ npm run lint</li>
+                        <li>☐ npm run test</li>
+                        <li>☐ npm run build (test)</li>
+                        <li>☐ Documentation mise à jour</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fichiers clés -->
+        <section class="mb-12 section-card bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-blue-500 pb-2">📚 Fichiers clés à consulter</h2>
+            <div class="grid md:grid-cols-3 gap-3">
+                <div class="bg-blue-50 p-3 rounded text-sm">
+                    <code class="text-blue-800">backend/manage.py</code>
+                </div>
+                <div class="bg-blue-50 p-3 rounded text-sm">
+                    <code class="text-blue-800">backend/requirements.txt</code>
+                </div>
+                <div class="bg-blue-50 p-3 rounded text-sm">
+                    <code class="text-blue-800">backend/embassy_backend/settings.py</code>
+                </div>
+                <div class="bg-indigo-50 p-3 rounded text-sm">
+                    <code class="text-indigo-800">backend/applications/models.py</code>
+                </div>
+                <div class="bg-indigo-50 p-3 rounded text-sm">
+                    <code class="text-indigo-800">backend/appointments/models.py</code>
+                </div>
+                <div class="bg-indigo-50 p-3 rounded text-sm">
+                    <code class="text-indigo-800">backend/core/models.py</code>
+                </div>
+                <div class="bg-purple-50 p-3 rounded text-sm">
+                    <code class="text-purple-800">frontend/package.json</code>
+                </div>
+                <div class="bg-purple-50 p-3 rounded text-sm">
+                    <code class="text-purple-800">frontend/src/</code>
+                </div>
+                <div class="bg-purple-50 p-3 rounded text-sm">
+                    <code class="text-purple-800">README.md</code>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">Documentation technique - PWA Ambassade du Congo au Sénégal</p>
+            <p class="text-gray-500 text-sm mt-2">Généré depuis l'extraction du code source</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active section in navigation
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('bg-blue-100', 'text-blue-700', 'font-semibold');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('bg-blue-100', 'text-blue-700', 'font-semibold');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

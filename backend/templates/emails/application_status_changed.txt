@@ -1,0 +1,29 @@
+Mise à jour de votre demande {{ application.reference_number }}
+
+Bonjour {{ user.get_full_name }},
+
+Votre demande consulaire a été mise à jour.
+
+Détails de la demande:
+- Référence: {{ application.reference_number }}
+- Type: {{ application.get_application_type_display }}
+- Service: {{ application.service_type.name }}
+- Nouveau statut: {{ application.get_status_display }}
+
+{% if application.admin_notes %}
+Notes administratives:
+{{ application.admin_notes }}
+{% endif %}
+
+{% if application.rejection_reason %}
+Raison du rejet:
+{{ application.rejection_reason }}
+{% endif %}
+
+Vous pouvez suivre l'avancement de votre demande en vous connectant à votre espace personnel.
+
+Si vous avez des questions, n'hésitez pas à nous contacter.
+
+Cordialement,
+L'équipe consulaire
+{{ site_name }}

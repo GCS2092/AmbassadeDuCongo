@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ambassade de la République du Congo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Bandeaux aux couleurs du drapeau */
+        .header {
+            height: 8px;
+            background: linear-gradient(135deg, #009543 0%, #009543 33%, #FBDE4A 33%, #FBDE4A 66%, #DC241F 66%, #DC241F 100%);
+        }
+
+        h2 {
+            color: #DC241F; /* Rouge du drapeau */
+            font-size: 28px;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #777;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header"></div>
+
+    <p>Bonjour {{ user.first_name }},</p>
+
+    <p>Bienvenue sur la plateforme de l'Ambassade de la République du Congo au Sénégal !</p>
+
+    <p>Voici vos informations de connexion :</p>
+
+    <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
+        <p><strong>Email :</strong> {{ user.email }}</p>
+        {% if password %}
+        <p><strong>Mot de passe :</strong> {{ password }}</p>
+        <p style="color: #dc2626; font-size: 12px; margin-top: 10px;">
+            ⚠️ <strong>Important :</strong> Conservez ce mot de passe en sécurité. Vous pouvez le changer une fois connecté.
+        </p>
+        {% endif %}
+    </div>
+
+    <p>Voici votre code de vérification pour valider votre compte :</p>
+
+    <h2 style="background: #f0f0f0; padding: 15px; text-align: center; border-radius: 5px; letter-spacing: 5px;">{{ code }}</h2>
+
+    <p>Ce code est valable pendant 1 heure.</p>
+
+    <p><strong>Prochaines étapes :</strong></p>
+    <ol>
+        <li>Entrez votre code de vérification sur la plateforme</li>
+        <li>Si vous n'avez pas de carte consulaire, vous devrez vous rendre à l'ambassade pour l'obtenir et activer votre compte</li>
+        <li>Une fois votre compte activé, vous pourrez accéder à tous les services</li>
+    </ol>
+
+    <p>Si vous n'avez pas demandé ce compte, ignorez ce message.</p>
+
+    <p>Cordialement,<br>
+    L’équipe de l’Ambassade de la République du Congo</p>
+
+    <div class="footer">
+        Ceci est un message automatique, merci de ne pas y répondre.
+    </div>
+
+    <div class="header"></div>
+</body>
+</html>

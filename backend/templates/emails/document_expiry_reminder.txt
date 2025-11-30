@@ -1,0 +1,37 @@
+Rappel d'expiration de document
+================================
+
+Bonjour {{ user.get_full_name }},
+
+Votre document expire bientôt
+------------------------------
+
+Document : {{ document.name }}
+Type : {{ document.get_document_type_display }}
+Date d'expiration : {{ expiry_date|date:"d/m/Y" }}
+Jours restants : {{ days_remaining }} jour(s)
+
+⚠️ ATTENTION : Il vous reste seulement {{ days_remaining }} jour(s) pour renouveler votre document.
+
+Action requise :
+----------------
+Nous vous rappelons de renouveler ce document dès que possible pour éviter tout problème.
+
+Pour prendre un rendez-vous :
+https://ambassade-congo.sn/appointments
+
+Conseils :
+----------
+- Renouvelez vos documents 2-3 mois avant l'expiration
+- Préparez tous les documents nécessaires à l'avance
+- Vérifiez les horaires d'ouverture de l'ambassade
+
+Pour toute question, n'hésitez pas à nous contacter.
+
+Cordialement,
+L'équipe de l'Ambassade du Congo
+Sénégal
+
+---
+Cet email a été envoyé automatiquement. Merci de ne pas y répondre.
+Ambassade de la République du Congo - Sénégal
