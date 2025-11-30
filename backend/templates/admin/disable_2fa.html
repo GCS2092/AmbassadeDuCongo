@@ -1,0 +1,102 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}Désactiver 2FA{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    .disable-2fa-container {
+        max-width: 500px;
+        margin: 100px auto;
+        padding: 40px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .warning-box {
+        background: #fff3cd;
+        border: 2px solid #ffc107;
+        padding: 20px;
+        border-radius: 4px;
+        margin: 20px 0;
+    }
+    .warning-box h3 {
+        color: #856404;
+        margin-top: 0;
+    }
+    .confirm-checkbox {
+        margin: 20px 0;
+        padding: 15px;
+        background: #f5f5f5;
+        border-radius: 4px;
+    }
+    .confirm-checkbox input[type="checkbox"] {
+        margin-right: 10px;
+        transform: scale(1.5);
+    }
+    .btn-disable {
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .btn-disable:hover {
+        background: #c82333;
+    }
+    .btn-cancel {
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+        background: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+    }
+    .btn-cancel:hover {
+        background: #5a6268;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="disable-2fa-container">
+    <h1>⚠️ Désactiver l'authentification à deux facteurs</h1>
+    
+    <div class="warning-box">
+        <h3>⚠️ Attention !</h3>
+        <p>
+            La désactivation de la 2FA réduira la sécurité de votre compte administrateur.
+            Votre compte sera plus vulnérable aux attaques.
+        </p>
+        <p>
+            <strong>Êtes-vous sûr de vouloir désactiver la 2FA ?</strong>
+        </p>
+    </div>
+    
+    <form method="post" action="{% url 'admin:disable_2fa' %}">
+        {% csrf_token %}
+        <div class="confirm-checkbox">
+            <label>
+                <input type="checkbox" name="confirm" value="yes" required>
+                <strong>Oui, je confirme que je veux désactiver la 2FA</strong>
+            </label>
+        </div>
+        
+        <button type="submit" class="btn-disable">Désactiver la 2FA</button>
+    </form>
+    
+    <a href="{% url 'admin:index' %}" class="btn-cancel">Annuler</a>
+</div>
+{% endblock %}
+

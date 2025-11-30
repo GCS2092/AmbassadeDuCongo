@@ -72,6 +72,7 @@ MIDDLEWARE = [
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         # 'session_security.middleware.SessionSecurityMiddleware',  # Désactivé - incompatible avec Django 4.2
     'django_otp.middleware.OTPMiddleware',
+    'users.middleware_2fa.Admin2FAMiddleware',  # Force 2FA for admins in Django Admin
     'allauth.account.middleware.AccountMiddleware',  # Required by allauth
     'axes.middleware.AxesMiddleware',  # Brute force protection
     'django.contrib.messages.middleware.MessageMiddleware',

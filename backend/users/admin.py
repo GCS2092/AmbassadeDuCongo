@@ -4,13 +4,16 @@ Admin interface for User management
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
+from django.utils.html import format_html
+from django_otp import user_has_device
 from .models import User, Profile, EmailVerificationCode, UserDocument, DocumentReminder
 
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     """Custom User Admin with role management"""
-    list_display = ['email', 'username', 'first_name', 'last_name', 'role', 'is_verified', 'is_active', 'date_joined']
+    list_display = ['email', 'username', 'first_name', 'last_name', 'role', 'is_verified', 'is_active', 'date_joined', 'get_2fa_status']
     list_filter = ['role', 'is_verified', 'is_active', 'is_2fa_enabled', 'date_joined']
     search_fields = ['email', 'username', 'first_name', 'last_name']
     ordering = ['-date_joined']
@@ -26,6 +29,33 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('email', 'role', 'phone_number')
         }),
     )
+    
+    def get_2fa_status(self, obj):
+        """Affiche le statut de la 2FA avec un lien vers la configuration"""
+        if obj.role in ['ADMIN', 'SUPERADMIN']:
+            if user_has_device(obj):
+                if obj.is_2fa_enabled:
+                    return format_html(
+                        '<span style="color: green;">✓ Activée</span> | '
+                        '<a href="{}">Reconfigurer</a> | '
+                        '<a href="{}">Désactiver</a>',
+                        reverse('admin:setup_2fa'),
+                        reverse('admin:disable_2fa')
+                    )
+                else:
+                    return format_html(
+                        '<span style="color: orange;">⚠ Configurée mais non activée</span> | '
+                        '<a href="{}">Activer</a>',
+                        reverse('admin:setup_2fa')
+                    )
+            else:
+                return format_html(
+                    '<span style="color: red;">✗ Non configurée</span> | '
+                    '<a href="{}">Configurer</a>',
+                    reverse('admin:setup_2fa')
+                )
+        return 'Non requis'
+    get_2fa_status.short_description = 'Statut 2FA'
 
 
 @admin.register(Profile)

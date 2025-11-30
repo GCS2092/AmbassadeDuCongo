@@ -1,0 +1,129 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}Configuration 2FA{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    .setup-2fa-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .qr-code-container {
+        text-align: center;
+        margin: 30px 0;
+    }
+    .qr-code-container img {
+        border: 2px solid #ddd;
+        padding: 10px;
+        background: white;
+    }
+    .secret-key {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 4px;
+        font-family: monospace;
+        word-break: break-all;
+        margin: 20px 0;
+        text-align: center;
+    }
+    .instructions {
+        background: #e7f3ff;
+        padding: 20px;
+        border-radius: 4px;
+        margin: 20px 0;
+        border-left: 4px solid #2196F3;
+    }
+    .instructions ol {
+        margin: 10px 0;
+        padding-left: 20px;
+    }
+    .instructions li {
+        margin: 8px 0;
+    }
+    .token-input {
+        width: 100%;
+        padding: 12px;
+        font-size: 18px;
+        text-align: center;
+        letter-spacing: 5px;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        margin: 20px 0;
+    }
+    .token-input:focus {
+        outline: none;
+        border-color: #2196F3;
+    }
+    .btn-verify {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .btn-verify:hover {
+        background: #1976D2;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="setup-2fa-container">
+    <h1>🔐 Configuration de l'authentification à deux facteurs (2FA)</h1>
+    
+    <div class="instructions">
+        <h3>Instructions :</h3>
+        <ol>
+            <li>Téléchargez une application d'authentification sur votre téléphone :
+                <ul>
+                    <li><strong>Google Authenticator</strong> (iOS/Android)</li>
+                    <li><strong>Microsoft Authenticator</strong> (iOS/Android)</li>
+                    <li><strong>Authy</strong> (iOS/Android)</li>
+                </ul>
+            </li>
+            <li>Scannez le QR code ci-dessous avec votre application</li>
+            <li>Ou entrez manuellement la clé secrète : <code>{{ secret_key }}</code></li>
+            <li>Entrez le code à 6 chiffres généré par l'application pour confirmer</li>
+        </ol>
+    </div>
+    
+    <div class="qr-code-container">
+        <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code 2FA" />
+    </div>
+    
+    <div class="secret-key">
+        <strong>Clé secrète :</strong><br>
+        {{ secret_key }}
+    </div>
+    
+    <form method="post" action="{% url 'admin:setup_2fa' %}">
+        {% csrf_token %}
+        <input 
+            type="text" 
+            name="token" 
+            class="token-input" 
+            placeholder="000000" 
+            maxlength="6" 
+            pattern="[0-9]{6}" 
+            required 
+            autocomplete="off"
+            autofocus
+        />
+        <button type="submit" class="btn-verify">Vérifier et activer la 2FA</button>
+    </form>
+    
+    <p style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'admin:index' %}">Retour à l'administration</a>
+    </p>
+</div>
+{% endblock %}
+

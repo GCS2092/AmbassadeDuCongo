@@ -1,0 +1,147 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}Vérification 2FA - Connexion{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    .login-verify-container {
+        max-width: 500px;
+        margin: 100px auto;
+        padding: 40px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    .login-verify-container h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+    .user-info {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 4px;
+        margin-bottom: 30px;
+    }
+    .user-info p {
+        margin: 5px 0;
+    }
+    .info-text {
+        color: #666;
+        margin: 20px 0;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    .google-auth-info {
+        background: #e8f5e9;
+        border: 2px solid #4caf50;
+        padding: 15px;
+        border-radius: 4px;
+        margin: 20px 0;
+    }
+    .google-auth-info h3 {
+        color: #2e7d32;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+    .google-auth-info p {
+        margin: 5px 0;
+        color: #1b5e20;
+    }
+    .token-input {
+        width: 100%;
+        padding: 15px;
+        font-size: 24px;
+        text-align: center;
+        letter-spacing: 8px;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        margin: 30px 0;
+        font-weight: bold;
+        box-sizing: border-box;
+    }
+    .token-input:focus {
+        outline: none;
+        border-color: #2196F3;
+        box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+    }
+    .btn-verify {
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .btn-verify:hover {
+        background: #1976D2;
+    }
+    .btn-cancel {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        background: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+        text-decoration: none;
+        display: block;
+    }
+    .btn-cancel:hover {
+        background: #5a6268;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-verify-container">
+    <h1>🔐 Vérification 2FA</h1>
+    
+    <div class="user-info">
+        <p><strong>Utilisateur :</strong> {{ user.get_full_name|default:user.email }}</p>
+        <p><strong>Email :</strong> {{ user.email }}</p>
+    </div>
+    
+    <div class="google-auth-info">
+        <h3>📱 Google Authenticator</h3>
+        <p>Ouvrez votre application <strong>Google Authenticator</strong></p>
+        <p>Entrez le code à 6 chiffres affiché</p>
+    </div>
+    
+    <p class="info-text">
+        Pour des raisons de sécurité, veuillez entrer le code d'authentification à deux facteurs 
+        généré par votre application Google Authenticator.
+    </p>
+    
+    <form method="post" action="{% url 'admin:login_verify_2fa' %}">
+        {% csrf_token %}
+        <input 
+            type="text" 
+            name="token" 
+            class="token-input" 
+            placeholder="000000" 
+            maxlength="6" 
+            pattern="[0-9]{6}" 
+            required 
+            autocomplete="off"
+            autofocus
+            inputmode="numeric"
+        />
+        <button type="submit" class="btn-verify">Vérifier et se connecter</button>
+    </form>
+    
+    <form method="post" action="{% url 'admin:login' %}">
+        {% csrf_token %}
+        <input type="hidden" name="cancel" value="1">
+        <button type="submit" class="btn-cancel">Annuler et retourner à la connexion</button>
+    </form>
+</div>
+{% endblock %}
+
