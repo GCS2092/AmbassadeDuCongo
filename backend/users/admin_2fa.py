@@ -48,20 +48,23 @@ class Setup2FAView(View):
             messages.error(request, 'La 2FA n\'est requise que pour les administrateurs.')
             return redirect('admin:index')
         
-        # Si l'utilisateur a déjà un appareil TOTP, le récupérer
-        devices = list(devices_for_user(user))
-        totp_device = None
-        for device in devices:
-            if isinstance(device, TOTPDevice):
-                totp_device = device
-                break
+        # Paramètre pour forcer la recréation d'un nouvel appareil
+        force_new = request.GET.get('new', '0') == '1'
+        
+        # Si force_new, supprimer TOUS les anciens appareils non confirmés
+        if force_new:
+            TOTPDevice.objects.filter(user=user, confirmed=False).delete()
+        
+        # Chercher un appareil TOTP existant (confirmé ou non)
+        totp_device = TOTPDevice.objects.filter(user=user).first()
         
         # Si aucun appareil n'existe, en créer un nouveau
         if not totp_device:
             totp_device = TOTPDevice.objects.create(
                 user=user,
-                name='default',
-                confirmed=False
+                name='Ambassade Congo Admin',
+                confirmed=False,
+                tolerance=2  # Accepte codes de +/- 60 secondes pour le décalage horaire
             )
         
         # Générer le QR code
@@ -93,30 +96,29 @@ class Setup2FAView(View):
             messages.error(request, 'Veuillez entrer un code de vérification.')
             return redirect('admin_setup_2fa')
         
-        # Récupérer l'appareil TOTP de l'utilisateur
-        devices = list(devices_for_user(user))
-        totp_device = None
-        for device in devices:
-            if isinstance(device, TOTPDevice):
-                totp_device = device
-                break
+        # Récupérer l'appareil TOTP de l'utilisateur (le plus récent)
+        totp_device = TOTPDevice.objects.filter(user=user).order_by('-id').first()
         
         if not totp_device:
             messages.error(request, 'Aucun appareil 2FA trouvé. Veuillez recommencer la configuration.')
             return redirect('admin_setup_2fa')
         
-        # Vérifier le token
-        if totp_device.verify_token(token):
+        # Vérifier le token avec une tolérance pour le décalage horaire
+        # tolerance=2 permet +/- 60 secondes de décalage
+        if totp_device.verify_token(token, tolerance=2):
             # Confirmer l'appareil et activer la 2FA
             totp_device.confirmed = True
             totp_device.save()
             user.is_2fa_enabled = True
             user.save()
             
+            # Supprimer les autres appareils non confirmés
+            TOTPDevice.objects.filter(user=user, confirmed=False).exclude(id=totp_device.id).delete()
+            
             messages.success(request, 'La 2FA a été activée avec succès !')
             return redirect('admin:index')
         else:
-            messages.error(request, 'Code de vérification invalide. Veuillez réessayer.')
+            messages.error(request, 'Code de vérification invalide. Vérifiez que l\'heure de votre téléphone est correcte et réessayez.')
             return redirect('admin_setup_2fa')
 
 
