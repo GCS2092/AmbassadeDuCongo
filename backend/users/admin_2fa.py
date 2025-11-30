@@ -91,7 +91,7 @@ class Setup2FAView(View):
         
         if not token:
             messages.error(request, 'Veuillez entrer un code de vérification.')
-            return redirect('admin:setup_2fa')
+            return redirect('admin_setup_2fa')
         
         # Récupérer l'appareil TOTP de l'utilisateur
         devices = list(devices_for_user(user))
@@ -103,7 +103,7 @@ class Setup2FAView(View):
         
         if not totp_device:
             messages.error(request, 'Aucun appareil 2FA trouvé. Veuillez recommencer la configuration.')
-            return redirect('admin:setup_2fa')
+            return redirect('admin_setup_2fa')
         
         # Vérifier le token
         if totp_device.verify_token(token):
@@ -117,7 +117,7 @@ class Setup2FAView(View):
             return redirect('admin:index')
         else:
             messages.error(request, 'Code de vérification invalide. Veuillez réessayer.')
-            return redirect('admin:setup_2fa')
+            return redirect('admin_setup_2fa')
 
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -142,7 +142,7 @@ class Verify2FAView(View):
         # Vérifier si l'utilisateur a un appareil TOTP configuré
         if not user_has_device(user):
             messages.warning(request, 'Vous devez configurer la 2FA avant de continuer.')
-            return redirect('admin:setup_2fa')
+            return redirect('admin_setup_2fa')
         
         return render(request, self.template_name, {'user': user})
     

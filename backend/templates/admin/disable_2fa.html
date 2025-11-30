@@ -84,7 +84,7 @@
         </p>
     </div>
     
-    <form method="post" action="{% url 'admin:disable_2fa' %}">
+    <form method="post" action="{% url 'admin_disable_2fa' %}">
         {% csrf_token %}
         <div class="confirm-checkbox">
             <label>

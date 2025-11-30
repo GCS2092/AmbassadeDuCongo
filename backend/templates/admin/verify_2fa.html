@@ -76,7 +76,7 @@
         Veuillez entrer le code à 6 chiffres généré par votre application d'authentification
     </p>
     
-    <form method="post" action="{% url 'admin:verify_2fa' %}">
+    <form method="post" action="{% url 'admin_verify_2fa' %}">
         {% csrf_token %}
         <input 
             type="text" 
@@ -94,7 +94,7 @@
     </form>
     
     <p style="margin-top: 20px;">
-        <a href="{% url 'admin:setup_2fa' %}">Reconfigurer la 2FA</a> | 
+        <a href="{% url 'admin_setup_2fa' %}">Reconfigurer la 2FA</a> | 
         <a href="{% url 'admin:logout' %}">Se déconnecter</a>
     </p>
 </div>

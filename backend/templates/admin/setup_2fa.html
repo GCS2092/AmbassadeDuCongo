@@ -105,7 +105,7 @@
         {{ secret_key }}
     </div>
     
-    <form method="post" action="{% url 'admin:setup_2fa' %}">
+    <form method="post" action="{% url 'admin_setup_2fa' %}">
         {% csrf_token %}
         <input 
             type="text" 

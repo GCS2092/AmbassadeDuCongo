@@ -57,7 +57,7 @@ class Admin2FAMiddleware(MiddlewareMixin):
         if not user_has_device(user):
             # Rediriger vers la page de configuration 2FA
             if request.path != '/admin/setup-2fa/':
-                return redirect('admin:setup_2fa')
+                return redirect('admin_setup_2fa')
             return None
         
         # Vérifier si l'utilisateur a vérifié la 2FA dans cette session
@@ -65,7 +65,7 @@ class Admin2FAMiddleware(MiddlewareMixin):
         if hasattr(request.user, 'is_verified') and not request.user.is_verified():
             # Rediriger vers la page de vérification 2FA
             if request.path not in ['/admin/verify-2fa/', '/admin/setup-2fa/']:
-                return redirect('admin:verify_2fa')
+                return redirect('admin_verify_2fa')
             return None
         
         return None

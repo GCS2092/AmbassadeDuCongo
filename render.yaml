@@ -2,9 +2,18 @@ services:
   - type: web
     name: ambassade-backend
     env: python
-    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate --noinput
     startCommand: gunicorn embassy_backend.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ambassade-backend.onrender.com
+      - key: USE_SQLITE
+        value: "True"
+      - key: CORS_ALLOW_ALL_ORIGINS
+        value: "True"
 

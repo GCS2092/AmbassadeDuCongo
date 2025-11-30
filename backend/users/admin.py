@@ -39,20 +39,20 @@ class UserAdmin(BaseUserAdmin):
                         '<span style="color: green;">✓ Activée</span> | '
                         '<a href="{}">Reconfigurer</a> | '
                         '<a href="{}">Désactiver</a>',
-                        reverse('admin:setup_2fa'),
-                        reverse('admin:disable_2fa')
+                        reverse('admin_setup_2fa'),
+                        reverse('admin_disable_2fa')
                     )
                 else:
                     return format_html(
                         '<span style="color: orange;">⚠ Configurée mais non activée</span> | '
                         '<a href="{}">Activer</a>',
-                        reverse('admin:setup_2fa')
+                        reverse('admin_setup_2fa')
                     )
             else:
                 return format_html(
                     '<span style="color: red;">✗ Non configurée</span> | '
                     '<a href="{}">Configurer</a>',
-                    reverse('admin:setup_2fa')
+                    reverse('admin_setup_2fa')
                 )
         return 'Non requis'
     get_2fa_status.short_description = 'Statut 2FA'

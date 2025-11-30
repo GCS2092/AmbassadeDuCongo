@@ -35,7 +35,7 @@
             {% endfor %}
         {% endif %}
 
-        <form action="{% url 'admin:login' %}" method="post" id="login-form">
+        <form action="{% url 'admin_login' %}" method="post" id="login-form">
             {% csrf_token %}
             
             <div class="form-row">

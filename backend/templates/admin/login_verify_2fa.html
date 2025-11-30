@@ -120,7 +120,7 @@
         généré par votre application Google Authenticator.
     </p>
     
-    <form method="post" action="{% url 'admin:login_verify_2fa' %}">
+    <form method="post" action="{% url 'admin_login_verify_2fa' %}">
         {% csrf_token %}
         <input 
             type="text" 
@@ -137,7 +137,7 @@
         <button type="submit" class="btn-verify">Vérifier et se connecter</button>
     </form>
     
-    <form method="post" action="{% url 'admin:login' %}">
+    <form method="post" action="{% url 'admin_login' %}">
         {% csrf_token %}
         <input type="hidden" name="cancel" value="1">
         <button type="submit" class="btn-cancel">Annuler et retourner à la connexion</button>

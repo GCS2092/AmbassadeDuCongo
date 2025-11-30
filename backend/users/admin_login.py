@@ -63,7 +63,7 @@ class AdminLoginView(LoginView):
                 
                 # Rediriger vers la page de vérification 2FA
                 messages.info(self.request, 'Veuillez entrer votre code d\'authentification à deux facteurs.')
-                return redirect('admin:login_verify_2fa')
+                return redirect('admin_login_verify_2fa')
         
         # Si pas de 2FA requise, connecter directement l'utilisateur
         login(self.request, user)
@@ -85,27 +85,27 @@ class AdminLoginVerify2FAView(View):
         """Vérifier qu'il y a un utilisateur en attente dans la session"""
         if 'pending_user_id' not in request.session:
             messages.error(request, 'Aucune session de connexion en cours.')
-            return redirect('admin:login')
+            return redirect('admin_login')
         return super().dispatch(request, *args, **kwargs)
     
     def get(self, request):
         """Afficher le formulaire de vérification 2FA"""
         user_id = request.session.get('pending_user_id')
         if not user_id:
-            return redirect('admin:login')
+            return redirect('admin_login')
         
         try:
             user = User.objects.get(id=user_id)
         except User.DoesNotExist:
             messages.error(request, 'Utilisateur introuvable.')
             request.session.pop('pending_user_id', None)
-            return redirect('admin:login')
+            return redirect('admin_login')
         
         # Vérifier que l'utilisateur a bien un appareil TOTP
         if not user_has_device(user):
             messages.error(request, 'Aucun appareil 2FA configuré. Veuillez contacter un administrateur.')
             request.session.pop('pending_user_id', None)
-            return redirect('admin:login')
+            return redirect('admin_login')
         
         from django.shortcuts import render
         return render(request, self.template_name, {'user': user})
@@ -116,19 +116,19 @@ class AdminLoginVerify2FAView(View):
         if request.POST.get('cancel'):
             request.session.pop('pending_user_id', None)
             request.session.pop('pending_user_backend', None)
-            return redirect('admin:login')
+            return redirect('admin_login')
         
         user_id = request.session.get('pending_user_id')
         if not user_id:
             messages.error(request, 'Aucune session de connexion en cours.')
-            return redirect('admin:login')
+            return redirect('admin_login')
         
         try:
             user = User.objects.get(id=user_id)
         except User.DoesNotExist:
             messages.error(request, 'Utilisateur introuvable.')
             request.session.pop('pending_user_id', None)
-            return redirect('admin:login')
+            return redirect('admin_login')
         
         token = request.POST.get('token', '').strip()
         
