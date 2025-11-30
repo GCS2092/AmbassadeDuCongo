@@ -110,7 +110,8 @@ class Setup2FAView(View):
             totp_device.confirmed = True
             totp_device.save()
             user.is_2fa_enabled = True
-            user.save()
+            # IMPORTANT: utiliser update_fields pour éviter le conflit avec is_verified de django_otp
+            user.save(update_fields=['is_2fa_enabled'])
             
             # Nettoyer la session
             request.session.pop('setup_2fa_device_id', None)
@@ -198,7 +199,8 @@ class Disable2FAView(View):
         # Supprimer tous les appareils TOTP de l'utilisateur
         TOTPDevice.objects.filter(user=user).delete()
         user.is_2fa_enabled = False
-        user.save()
+        # IMPORTANT: utiliser update_fields pour éviter le conflit avec is_verified de django_otp
+        user.save(update_fields=['is_2fa_enabled'])
         
         messages.success(request, 'La 2FA a été désactivée avec succès.')
         return redirect('admin:index')
