@@ -14,16 +14,17 @@ from users.admin_login import AdminLoginView, AdminLoginVerify2FAView
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    # Remplacer la vue de login par défaut par notre vue personnalisée
-    path('admin/login/', AdminLoginView.as_view(), name='admin_login'),
-    path('admin/login/verify-2fa/', AdminLoginVerify2FAView.as_view(), name='admin_login_verify_2fa'),
-    path('admin/', admin.site.urls),
-    # Redirection pour site-settings (URL simplifiée)
-    path('admin/site-settings', RedirectView.as_view(url='/admin/core/sitesettings/', permanent=False), name='site-settings-redirect'),
-    # URLs pour la 2FA dans l'admin
+    # URLs pour la 2FA dans l'admin (AVANT admin.site.urls pour être interceptées en premier)
     path('admin/setup-2fa/', Setup2FAView.as_view(), name='admin_setup_2fa'),
     path('admin/verify-2fa/', Verify2FAView.as_view(), name='admin_verify_2fa'),
     path('admin/disable-2fa/', Disable2FAView.as_view(), name='admin_disable_2fa'),
+    # Remplacer la vue de login par défaut par notre vue personnalisée
+    path('admin/login/', AdminLoginView.as_view(), name='admin_login'),
+    path('admin/login/verify-2fa/', AdminLoginVerify2FAView.as_view(), name='admin_login_verify_2fa'),
+    # Redirection pour site-settings (URL simplifiée)
+    path('admin/site-settings', RedirectView.as_view(url='/admin/core/sitesettings/', permanent=False), name='site-settings-redirect'),
+    # Admin Django (après les URLs personnalisées)
+    path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/auth/', include('users.urls')),
     path('api/core/', include('core.urls')),
