@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.http import JsonResponse
-from django_otp import devices_for_user, user_has_device
+from django_otp import devices_for_user, user_has_device, login as otp_login
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django_otp.decorators import otp_required
 from django_otp.util import random_hex
@@ -113,6 +113,10 @@ class Setup2FAView(View):
             # IMPORTANT: utiliser update_fields pour éviter le conflit avec is_verified de django_otp
             user.save(update_fields=['is_2fa_enabled'])
             
+            # Marquer l'utilisateur comme vérifié OTP pour cette session
+            # Cela permet d'accéder à l'admin sans re-vérifier immédiatement
+            otp_login(request, totp_device)
+            
             # Nettoyer la session
             request.session.pop('setup_2fa_device_id', None)
             
@@ -167,9 +171,8 @@ class Verify2FAView(View):
                 break
         
         if verified_device:
-            # Marquer l'appareil comme vérifié pour cette session
-            # django_otp gère automatiquement la vérification via le middleware
-            verified_device.generate_challenge()
+            # Marquer l'utilisateur comme vérifié OTP pour cette session
+            otp_login(request, verified_device)
             messages.success(request, 'Authentification 2FA réussie.')
             return redirect('admin:index')
         else:
