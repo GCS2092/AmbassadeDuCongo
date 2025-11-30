@@ -1,6 +1,6 @@
 # Core Django
 Django==4.2.11
-psycopg2-binary==2.9.9
+psycopg2-binary>=2.9.9
 python-decouple==3.8
 
 # Django REST Framework
