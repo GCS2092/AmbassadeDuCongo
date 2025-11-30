@@ -4,11 +4,12 @@ Demande le code 2FA après la vérification du mot de passe pour les admins
 """
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
+from django.views import View
 from django_otp import devices_for_user, user_has_device
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from .models import User
