@@ -1,11 +1,15 @@
-"""
+ """
 Django signals for User app
 Auto-create Profile when User is created
 Désactiver automatiquement les utilisateurs sans carte consulaire
 """
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.db import transaction
 from .models import User, Profile
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @receiver(post_save, sender=User)
@@ -30,12 +34,15 @@ def check_consular_card_and_deactivate(sender, instance, **kwargs):
     
     # Pour tous les autres rôles (y compris VIGILE pour test), si pas de carte consulaire, désactiver le compte
     if not instance.consular_card_number:
-        # Toujours désactiver si pas de carte consulaire, même si déjà inactif
-        # Utiliser update pour éviter la récursion infinie et forcer la désactivation
-        User.objects.filter(pk=instance.pk).update(
-            is_active=False,
-            is_verified=False
-        )
+        # Utiliser update pour éviter la récursion infinie
+        # Entourer dans un try/except pour éviter les erreurs de transaction
+        try:
+            User.objects.filter(pk=instance.pk).update(
+                is_active=False,
+                is_verified=False
+            )
+        except Exception as e:
+            logger.warning(f"Erreur lors de la désactivation de l'utilisateur {instance.id}: {e}")
 
 
 @receiver(post_save, sender=User)
@@ -44,16 +51,28 @@ def save_user_profile(sender, instance, **kwargs):
     # Ne sauvegarder le profil que si :
     # 1. Le profil existe
     # 2. Ce n'est pas une création (created=True) car create_user_profile s'en charge
-    # 3. On évite les sauvegardes inutiles qui pourraient causer des erreurs
-    if hasattr(instance, 'profile') and not kwargs.get('created', False):
-        try:
-            # Vérifier si le profil a réellement changé avant de sauvegarder
-            # Cela évite les sauvegardes inutiles lors de mises à jour de l'utilisateur
-            # qui ne concernent pas le profil (comme last_login)
-            instance.profile.save()
-        except Exception as e:
-            # Logger l'erreur mais ne pas bloquer la sauvegarde de l'utilisateur
-            import logging
-            logger = logging.getLogger(__name__)
-            logger.warning(f"Erreur lors de la sauvegarde du profil pour l'utilisateur {instance.id}: {e}")
-
+    # 3. La transaction est propre (pas d'erreur en cours)
+    
+    # Ignorer si c'est une création
+    if kwargs.get('created', False):
+        return
+    
+    # Ignorer si le profil n'existe pas encore
+    if not hasattr(instance, 'profile'):
+        return
+    
+    # Ne sauvegarder que si nous sommes dans une transaction propre
+    try:
+        # Vérifier si nous sommes dans une transaction atomique avec erreur
+        if transaction.get_connection().in_atomic_block:
+            # Ne pas tenter de sauvegarder si une erreur s'est produite
+            if transaction.get_connection().needs_rollback:
+                logger.debug(f"Transaction en erreur, pas de sauvegarde du profil pour l'utilisateur {instance.id}")
+                return
+        
+        # Sauvegarder le profil uniquement s'il n'y a pas d'erreur
+        instance.profile.save()
+        
+    except Exception as e:
+        # Logger l'erreur mais ne pas bloquer la sauvegarde de l'utilisateur
+        logger.warning(f"Erreur lors de la sauvegarde du profil pour l'utilisateur {instance.id}: {e}")
