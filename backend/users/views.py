@@ -19,7 +19,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.utils import timezone
 from django.conf import settings
-from django.db import models
+from django.db import models, DataError
 from datetime import date, timedelta
 from ipware import get_client_ip
 
@@ -876,7 +876,24 @@ class UserViewSet(viewsets.ModelViewSet):
             
             user.is_verified = True
             user.is_active = True
-            user.save()
+            try:
+                user.save(update_fields=['is_verified', 'is_active'])
+            except DataError as e:
+                try:
+                    field_lengths = []
+                    for f in user._meta.get_fields():
+                        if isinstance(f, (models.CharField, models.TextField)):
+                            val = getattr(user, f.name, None)
+                            if val is not None:
+                                s = str(val)
+                                field_lengths.append((f.name, len(s), (s[:100] + '...') if len(s) > 100 else s))
+                    logger.error(f"DataError saving user {user.id} during activation: {e}. Field lengths: {[(n,l) for n,l,preview in field_lengths]}")
+                except Exception as log_exc:
+                    logger.error(f"Failed to log field lengths for user {user.id}: {log_exc}")
+                raise
+            except Exception as e:
+                logger.error(f"Failed to save user {user.id} during activation: {e}")
+                raise
             
             # Envoyer un email si le compte vient d'être activé
             if was_inactive:
@@ -919,7 +936,24 @@ class UserViewSet(viewsets.ModelViewSet):
             
             user.is_verified = False
             user.is_active = False
-            user.save()
+            try:
+                user.save(update_fields=['is_verified', 'is_active'])
+            except DataError as e:
+                try:
+                    field_lengths = []
+                    for f in user._meta.get_fields():
+                        if isinstance(f, (models.CharField, models.TextField)):
+                            val = getattr(user, f.name, None)
+                            if val is not None:
+                                s = str(val)
+                                field_lengths.append((f.name, len(s), (s[:100] + '...') if len(s) > 100 else s))
+                    logger.error(f"DataError saving user {user.id} during deactivation: {e}. Field lengths: {[(n,l) for n,l,preview in field_lengths]}")
+                except Exception as log_exc:
+                    logger.error(f"Failed to log field lengths for user {user.id}: {log_exc}")
+                raise
+            except Exception as e:
+                logger.error(f"Failed to save user {user.id} during deactivation: {e}")
+                raise
             
             # Envoyer un email si le compte était actif
             if was_active:
