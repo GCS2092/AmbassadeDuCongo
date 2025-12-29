@@ -215,6 +215,24 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         # Le numéro sera vérifié lors de l'activation par l'admin.
         
         return value_upper
+
+    def validate_phone_number(self, value):
+        """Validate phone format and maximal length for registration"""
+        if not value:
+            return ''
+        val = value.strip()
+        # Quick length guard on the clear-text phone (prevent excessively long input)
+        if len(val) > 30:
+            raise serializers.ValidationError("Numéro de téléphone trop long (max 30 caractères).")
+        import re
+        if not re.match(r'^\+?1?\d{9,15}$', val):
+            raise serializers.ValidationError("Format de numéro de téléphone invalide. Utilisez un format international, ex: +221771234567")
+        return val
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password_confirm']:
+            raise serializers.ValidationError({"password": "Les mots de passe ne correspondent pas."})
+        return attrs
     
     def validate(self, attrs):
         if attrs['password'] != attrs['password_confirm']:
@@ -331,6 +349,28 @@ class ProfileUpdateSerializer(serializers.ModelSerializer):
             # Contact d'urgence
             'emergency_contact_name', 'emergency_contact_phone'
         ]
+
+    def validate_work_phone(self, value):
+        if not value:
+            return ''
+        val = value.strip()
+        if len(val) > 30:
+            raise serializers.ValidationError("Numéro de téléphone professionnel trop long (max 30 caractères).")
+        import re
+        if not re.match(r'^\+?1?\d{9,15}$', val):
+            raise serializers.ValidationError("Format de numéro de téléphone invalide. Utilisez un format international, ex: +221771234567")
+        return val
+
+    def validate_emergency_contact_phone(self, value):
+        if not value:
+            return ''
+        val = value.strip()
+        if len(val) > 30:
+            raise serializers.ValidationError("Numéro de contact d'urgence trop long (max 30 caractères).")
+        import re
+        if not re.match(r'^\+?1?\d{9,15}$', val):
+            raise serializers.ValidationError("Format de numéro de téléphone invalide. Utilisez un format international, ex: +221771234567")
+        return val
 
 
 class UserDocumentSerializer(serializers.ModelSerializer):

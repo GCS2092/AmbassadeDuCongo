@@ -33,7 +33,7 @@ class User(AbstractUser):
     )
     email = models.EmailField(_('Email'), unique=True)
     phone_number = EncryptedCharField(
-        max_length=200,  # Increased to accommodate encrypted data
+        max_length=512,  # Increased to accommodate encrypted data (was 200)
         blank=True,
         validators=[RegexValidator(
             regex=r'^\+?1?\d{9,15}$',
