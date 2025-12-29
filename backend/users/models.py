@@ -110,16 +110,15 @@ class User(AbstractUser):
                 })
     
     def save(self, *args, **kwargs):
-    if self.consular_card_number:
-        new_hash = hashlib.sha256(
-            self.consular_card_number.encode('utf-8')
-        ).hexdigest()
-        if self.consular_card_number_hash != new_hash:
-            self.consular_card_number_hash = new_hash
-    else:
-        self.consular_card_number_hash = None
+        """Override save pour générer le hash de la carte consulaire"""
+        if self.consular_card_number:
+            self.consular_card_number_hash = hashlib.sha256(
+                self.consular_card_number.encode('utf-8')
+            ).hexdigest()
+        else:
+            self.consular_card_number_hash = None
 
-    super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
 
 class EmailVerificationCode(models.Model):

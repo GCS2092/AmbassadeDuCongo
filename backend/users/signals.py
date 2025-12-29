@@ -1,4 +1,4 @@
- """
+"""
 Django signals for User app
 Auto-create Profile when User is created
 Désactiver automatiquement les utilisateurs sans carte consulaire
